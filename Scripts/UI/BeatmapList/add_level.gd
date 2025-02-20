@@ -80,9 +80,10 @@ func create_level_dictory():
 	if !DirAccess.open(beatmap_path).dir_exists(level_name_edit.text):
 		DirAccess.open(beatmap_path).make_dir(level_name_edit.text)
 	
-	var midi_file: MidiData = ResourceLoader.load(beatmap_file_edit.text)
+	var midi_file_byte: PackedByteArray = FileAccess.get_file_as_bytes(beatmap_file_edit.text)
+	var midi_data: MidiData = MidiData.load_packed_byte_array(midi_file_byte)
 	beatmap_converter.set_bpm(GlobalVariable.selected_beatmap_info["BPM"])
-	beatmap_converter.import_beatmap_midi(midi_file)
+	beatmap_converter.import_beatmap_midi(midi_data)
 	
 	var note_array: Array = beatmap_converter.sort_note_group_time()
 	var hold_array: Array = beatmap_converter.sort_hold_group_time()
