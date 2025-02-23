@@ -1,0 +1,946 @@
+[gd_scene load_steps=29 format=3 uid="uid://cv1ujsegvyua8"]
+
+[ext_resource type="Texture2D" uid="uid://cxf0ds06cfw4b" path="res://icon.svg" id="1_hbdtn"]
+[ext_resource type="Script" path="res://Scripts/UI/BeatmapList/edit_beatmap_info.gd" id="2_nurl5"]
+[ext_resource type="Script" path="res://Scripts/UI/BeatmapList/load_beatmap_list.gd" id="3_fofow"]
+[ext_resource type="PackedScene" uid="uid://c1k5k0mahf4se" path="res://Scenes/music_item.tscn" id="4_xq48h"]
+[ext_resource type="Script" path="res://Scripts/UI/BeatmapList/add_level.gd" id="5_8u1wh"]
+[ext_resource type="Script" path="res://Scripts/Chart/beatmap_converter.gd" id="6_qghkb"]
+[ext_resource type="Script" path="res://Scripts/UI/BeatmapList/card_info_change.gd" id="7_h5mcf"]
+[ext_resource type="Script" path="res://Scripts/UI/BeatmapList/switch_button_visible.gd" id="8_uhcdt"]
+[ext_resource type="Script" path="res://Scripts/UI/BeatmapList/load_level_list.gd" id="9_fndke"]
+[ext_resource type="PackedScene" uid="uid://21hgkikx3xp7" path="res://Scenes/level_button.tscn" id="10_tlyr7"]
+[ext_resource type="Script" path="res://Scripts/UI/BeatmapList/settings_change.gd" id="11_rcfk0"]
+[ext_resource type="AudioStream" uid="uid://dxgwmse5llmjv" path="res://Sounds/784042__sadiquecat__mouth-chik.wav" id="12_is022"]
+[ext_resource type="Script" path="res://Scripts/UI/BeatmapList/delete_beatmap_level.gd" id="13_b7cxu"]
+[ext_resource type="Script" path="res://Scripts/UI/BeatmapList/key_config_change.gd" id="14_to6cl"]
+[ext_resource type="Script" path="res://Scripts/UI/BeatmapList/some_button_function.gd" id="15_fdaqo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ucjwi"]
+font_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5hrlj"]
+bg_color = Color(0.332173, 0.317766, 0.303779, 0.717647)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.352941)
+shadow_size = 4
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qcemx"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_28wrm"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_w5v8a"]
+font_size = 35
+
+[sub_resource type="LabelSettings" id="LabelSettings_e4xmq"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_nffa8"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_m5ieh"]
+font_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a4gsc"]
+bg_color = Color(0.200809, 0.200809, 0.200808, 1)
+shadow_color = Color(0, 0, 0, 0.360784)
+shadow_size = 10
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q5dld"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_7iyd2"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_4srhg"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_yfbgx"]
+font_size = 40
+
+[node name="ChartListUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="BeatmapList" type="MarginContainer" parent="UI/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HBoxContainer/BeatmapList"]
+custom_minimum_size = Vector2(780, 0)
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HBoxContainer/BeatmapList/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="QuitButton" type="Button" parent="UI/HBoxContainer/BeatmapList/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "<- Quit"
+
+[node name="AutoPlayButton" type="Button" parent="UI/HBoxContainer/BeatmapList/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+text = "Auto Play : OFF"
+
+[node name="PauseButton" type="Button" parent="UI/HBoxContainer/BeatmapList/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "▶"
+
+[node name="SearchBar(WIP)" type="LineEdit" parent="UI/HBoxContainer/BeatmapList/VBoxContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(530, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+placeholder_text = " Search Music Title..."
+
+[node name="AddButton" type="Button" parent="UI/HBoxContainer/BeatmapList/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "+"
+
+[node name="ScrollList" type="ScrollContainer" parent="UI/HBoxContainer/BeatmapList/VBoxContainer"]
+custom_minimum_size = Vector2(0, 580)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HBoxContainer/BeatmapList/VBoxContainer/ScrollList"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="NoBeatmapHint" type="Label" parent="UI/HBoxContainer/BeatmapList/VBoxContainer/ScrollList/VBoxContainer"]
+custom_minimum_size = Vector2(775, 0)
+layout_mode = 2
+text = "There are no beatmaps here! press the \"+\" button to add a beatmap."
+label_settings = SubResource("LabelSettings_ucjwi")
+autowrap_mode = 1
+
+[node name="BeatmapInfo" type="MarginContainer" parent="UI/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 30
+
+[node name="Panel" type="Panel" parent="UI/HBoxContainer/BeatmapInfo"]
+custom_minimum_size = Vector2(390, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5hrlj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HBoxContainer/BeatmapInfo/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="MarginContainer3" type="MarginContainer" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 15
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/MarginContainer3/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="EditButton" type="Button" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/MarginContainer3/CenterContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Edit"
+
+[node name="DeleteButton" type="Button" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/MarginContainer3/CenterContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Delete"
+
+[node name="ImageContainer" type="MarginContainer" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Panel" type="Panel" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/ImageContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qcemx")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/ImageContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Image" type="TextureRect" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/ImageContainer/MarginContainer" groups=["music_artwork"]]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("1_hbdtn")
+expand_mode = 1
+
+[node name="InfoContainer" type="VBoxContainer" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/InfoContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="MusicTitle" type="Label" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/InfoContainer/ScrollContainer" groups=["music_title"]]
+custom_minimum_size = Vector2(390, 0)
+layout_mode = 2
+text = "Title: {music_title}"
+label_settings = SubResource("LabelSettings_28wrm")
+horizontal_alignment = 1
+
+[node name="MusicBPM" type="Label" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/InfoContainer" groups=["music_bpm"]]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "BPM: {music_bpm}"
+label_settings = SubResource("LabelSettings_28wrm")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="MusicLength" type="Label" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/InfoContainer" groups=["music_length"]]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Length: {music_length}"
+label_settings = SubResource("LabelSettings_28wrm")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/MarginContainer2/ScrollContainer"]
+layout_mode = 2
+auto_translate = false
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="AddLevelButton" type="Button" parent="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/MarginContainer2/ScrollContainer/GridContainer"]
+visible = false
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "+"
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_bottom = 50
+
+[node name="SettingButton" type="Button" parent="UI/MarginContainer"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Setting..."
+
+[node name="EditBeatmapInfoDialog" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="CenterContainer" type="CenterContainer" parent="EditBeatmapInfoDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="EditBeatmapInfoDialog/CenterContainer"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditBeatmapInfoDialog/CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="DialogTitle" type="Label" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Edit Beatmap Info"
+label_settings = SubResource("LabelSettings_w5v8a")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="NameLabel" type="Label" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Name:"
+label_settings = SubResource("LabelSettings_e4xmq")
+
+[node name="AuthorLabel" type="Label" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Author: "
+label_settings = SubResource("LabelSettings_e4xmq")
+
+[node name="BPMLabel" type="Label" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "BPM: "
+label_settings = SubResource("LabelSettings_e4xmq")
+
+[node name="OffsetLabel" type="Label" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Offset: "
+label_settings = SubResource("LabelSettings_e4xmq")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="NameEdit" type="LineEdit" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+placeholder_text = "Enter the name..."
+expand_to_text_length = true
+
+[node name="AuthorEdit" type="LineEdit" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+placeholder_text = "Enter the author..."
+expand_to_text_length = true
+
+[node name="BPMEdit" type="LineEdit" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+placeholder_text = "Enter the bpm..."
+expand_to_text_length = true
+
+[node name="OffsetEdit" type="LineEdit" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+tooltip_text = "This blank fills in the time (in ms) from silent to the first beat of the music."
+theme_override_font_sizes/font_size = 25
+placeholder_text = "Enter the offset..."
+expand_to_text_length = true
+
+[node name="CenterContainer" type="CenterContainer" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="DialogOK" type="Button" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "OK"
+
+[node name="DialogCancel" type="Button" parent="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Cancel"
+
+[node name="AddLevelDialog" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="CenterContainer" type="CenterContainer" parent="AddLevelDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="AddLevelDialog/CenterContainer"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AddLevelDialog/CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="DialogTitle" type="Label" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Add a beatmap level"
+label_settings = SubResource("LabelSettings_nffa8")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Audio :"
+label_settings = SubResource("LabelSettings_m5ieh")
+
+[node name="Label3" type="Label" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Cover :"
+label_settings = SubResource("LabelSettings_m5ieh")
+
+[node name="Label2" type="Label" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Beatmap :"
+label_settings = SubResource("LabelSettings_m5ieh")
+
+[node name="Label4" type="Label" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level name :"
+label_settings = SubResource("LabelSettings_m5ieh")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="AudioFileEdit" type="LineEdit" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+placeholder_text = "Select audio file..."
+editable = false
+
+[node name="CoverEdit" type="LineEdit" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+placeholder_text = "Select cover file..."
+editable = false
+
+[node name="BeatmapEdit" type="LineEdit" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+placeholder_text = "Select beatmap file..."
+editable = false
+
+[node name="LevelNameEdit" type="LineEdit" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+placeholder_text = "Enter level name..."
+expand_to_text_length = true
+
+[node name="CenterContainer2" type="CenterContainer" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/CenterContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ImportAudioButton" type="Button" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/CenterContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Import Audio"
+
+[node name="ImpoetCoverButton" type="Button" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/CenterContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Import Cover"
+
+[node name="ImportBeatmapButton" type="Button" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/CenterContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Import Beatmap"
+
+[node name="CenterContainer" type="CenterContainer" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="OKButton" type="Button" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "OK"
+
+[node name="CancelButton" type="Button" parent="AddLevelDialog/CenterContainer/Panel/VBoxContainer/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Cancel"
+
+[node name="SettingDialog" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="CenterContainer" type="CenterContainer" parent="SettingDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="SettingDialog/CenterContainer"]
+custom_minimum_size = Vector2(800, 500)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a4gsc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingDialog/CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="SettingDialog/CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_q5dld")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingDialog/CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 280)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="FallSpeedLabel" type="Label" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Fall Speed"
+label_settings = SubResource("LabelSettings_7iyd2")
+
+[node name="MasterVolumeLabel" type="Label" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_7iyd2")
+
+[node name="BGMVolumeLabel" type="Label" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "BGM Volume"
+label_settings = SubResource("LabelSettings_7iyd2")
+
+[node name="SFXVolumeLabel" type="Label" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "SFX Volume"
+label_settings = SubResource("LabelSettings_7iyd2")
+
+[node name="GlobalOffsetLabel" type="Label" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Judge Offset"
+label_settings = SubResource("LabelSettings_7iyd2")
+
+[node name="Key1ConfigLabel" type="Label" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Key 1 Config"
+label_settings = SubResource("LabelSettings_7iyd2")
+
+[node name="Key2ConfigLabel" type="Label" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Key 2 Config"
+label_settings = SubResource("LabelSettings_7iyd2")
+
+[node name="Key3ConfigLabel" type="Label" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Key 3 Config"
+label_settings = SubResource("LabelSettings_7iyd2")
+
+[node name="Key4ConfigLabel" type="Label" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Key 4 Config"
+label_settings = SubResource("LabelSettings_7iyd2")
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 7
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="FallSpeedSlider" type="HSlider" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(350, 50)
+layout_mode = 2
+min_value = 10.0
+max_value = 40.0
+step = 0.1
+value = 30.0
+scrollable = false
+
+[node name="MasterVolumeSlider" type="HSlider" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(350, 50)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.8
+scrollable = false
+
+[node name="BGMVolumeSlider" type="HSlider" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(350, 50)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.8
+scrollable = false
+
+[node name="SFXVolumeSlider" type="HSlider" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(350, 50)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.8
+scrollable = false
+
+[node name="GlobalOffsetEdit" type="LineEdit" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+alignment = 1
+
+[node name="Key1ConfigButton" type="Button" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "D"
+
+[node name="Key2ConfigButton" type="Button" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "F"
+
+[node name="Key3ConfigButton" type="Button" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "J"
+
+[node name="Key4ConfigButton" type="Button" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "K"
+
+[node name="MarginContainer2" type="MarginContainer" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="FallSpeedvalue" type="Label" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer2"]
+layout_mode = 2
+text = "30.0"
+label_settings = SubResource("LabelSettings_4srhg")
+
+[node name="MasterVolumeValue" type="Label" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer2"]
+layout_mode = 2
+text = "80"
+label_settings = SubResource("LabelSettings_4srhg")
+
+[node name="BGMVolumeValue" type="Label" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer2"]
+layout_mode = 2
+text = "80"
+label_settings = SubResource("LabelSettings_4srhg")
+
+[node name="SFXVolumeValue" type="Label" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer2"]
+layout_mode = 2
+text = "80"
+label_settings = SubResource("LabelSettings_4srhg")
+
+[node name="CenterContainer" type="CenterContainer" parent="SettingDialog/CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="OKButton" type="Button" parent="SettingDialog/CenterContainer/Panel/VBoxContainer/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "OK"
+
+[node name="DeleteDialog" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="CenterContainer" type="CenterContainer" parent="DeleteDialog"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="DeleteDialog/CenterContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="DeleteDialog/CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeleteDialog/CenterContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="DeleteDialog/CenterContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Are you sure?"
+label_settings = SubResource("LabelSettings_yfbgx")
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="DeleteDialog/CenterContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DeleteDialog/CenterContainer/Panel/MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="DeleteYes" type="Button" parent="DeleteDialog/CenterContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "YES"
+
+[node name="DeleteNo" type="Button" parent="DeleteDialog/CenterContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "NO"
+
+[node name="Scripts" type="Node" parent="."]
+
+[node name="EditBeatmapInfo" type="Node" parent="Scripts" node_paths=PackedStringArray("edit_dialog", "music_name_editor", "music_author_editor", "music_bpm_editor", "music_offset_editor", "load_beatmap_list")]
+script = ExtResource("2_nurl5")
+edit_dialog = NodePath("../../EditBeatmapInfoDialog")
+music_name_editor = NodePath("../../EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer/VBoxContainer2/NameEdit")
+music_author_editor = NodePath("../../EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer/VBoxContainer2/AuthorEdit")
+music_bpm_editor = NodePath("../../EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer/VBoxContainer2/BPMEdit")
+music_offset_editor = NodePath("../../EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/HBoxContainer/VBoxContainer2/OffsetEdit")
+load_beatmap_list = NodePath("../LoadBeatmapList")
+
+[node name="LoadBeatmapList" type="Node" parent="Scripts" node_paths=PackedStringArray("no_beatmap_hint", "list_node")]
+script = ExtResource("3_fofow")
+no_beatmap_hint = NodePath("../../UI/HBoxContainer/BeatmapList/VBoxContainer/ScrollList/VBoxContainer/NoBeatmapHint")
+music_info_item = ExtResource("4_xq48h")
+list_node = NodePath("../../UI/HBoxContainer/BeatmapList/VBoxContainer/ScrollList/VBoxContainer")
+
+[node name="AddLevel" type="Node" parent="Scripts" node_paths=PackedStringArray("edit_level_info_dialog", "select_audio_file_dialog", "select_midi_file_dialog", "select_cover_file_dialog", "audio_file_text_edit", "beatmap_file_edit", "cover_file_edit", "level_name_edit", "beatmap_converter")]
+script = ExtResource("5_8u1wh")
+edit_level_info_dialog = NodePath("../../AddLevelDialog")
+select_audio_file_dialog = NodePath("../../Dialogs/AudioFileDialog")
+select_midi_file_dialog = NodePath("../../Dialogs/MIDIFileDialog")
+select_cover_file_dialog = NodePath("../../Dialogs/CoverFileDialog")
+audio_file_text_edit = NodePath("../../AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/AudioFileEdit")
+beatmap_file_edit = NodePath("../../AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/BeatmapEdit")
+cover_file_edit = NodePath("../../AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/CoverEdit")
+level_name_edit = NodePath("../../AddLevelDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/LevelNameEdit")
+beatmap_converter = NodePath("../BeatmapConverter")
+
+[node name="BeatmapConverter" type="Node" parent="Scripts"]
+script = ExtResource("6_qghkb")
+
+[node name="CardInfoChange" type="Node" parent="Scripts" node_paths=PackedStringArray("music_title", "music_bpm", "music_len", "music_artwork_rect", "preview_bgm")]
+script = ExtResource("7_h5mcf")
+music_title = NodePath("../../UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/InfoContainer/ScrollContainer/MusicTitle")
+music_bpm = NodePath("../../UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/InfoContainer/MusicBPM")
+music_len = NodePath("../../UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/InfoContainer/MusicLength")
+music_artwork_rect = NodePath("../../UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/ImageContainer/MarginContainer/Image")
+preview_bgm = NodePath("../../Audio/PreviewBGM")
+
+[node name="SwitchButtonVisible" type="Node" parent="Scripts" node_paths=PackedStringArray("edit_info_button", "delete_beatmap_button", "add_level_button", "image_container", "info_container")]
+script = ExtResource("8_uhcdt")
+edit_info_button = NodePath("../../UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/MarginContainer3/CenterContainer/HBoxContainer/EditButton")
+delete_beatmap_button = NodePath("../../UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/MarginContainer3/CenterContainer/HBoxContainer/DeleteButton")
+add_level_button = NodePath("../../UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/MarginContainer2/ScrollContainer/GridContainer/AddLevelButton")
+image_container = NodePath("../../UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/ImageContainer")
+info_container = NodePath("../../UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/InfoContainer")
+
+[node name="LoadLevelList" type="Node" parent="Scripts" node_paths=PackedStringArray("level_container")]
+script = ExtResource("9_fndke")
+level_container = NodePath("../../UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/MarginContainer2/ScrollContainer/GridContainer")
+level_button = ExtResource("10_tlyr7")
+
+[node name="SettingsChange" type="Node" parent="Scripts" node_paths=PackedStringArray("setting_dialog", "fall_speed_value", "master_volume_value", "bgm_volume_value", "sfx_volume_value", "global_offset_value", "fall_speed_slider", "master_volume_slider", "bgm_volume_slider", "sfx_volume_slider", "key_1_button", "key_2_button", "key_3_button", "key_4_button", "sfx_sound_player")]
+script = ExtResource("11_rcfk0")
+setting_dialog = NodePath("../../SettingDialog")
+fall_speed_value = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer2/FallSpeedvalue")
+master_volume_value = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer2/MasterVolumeValue")
+bgm_volume_value = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer2/BGMVolumeValue")
+sfx_volume_value = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer2/SFXVolumeValue")
+global_offset_value = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/GlobalOffsetEdit")
+fall_speed_slider = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/FallSpeedSlider")
+master_volume_slider = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/MasterVolumeSlider")
+bgm_volume_slider = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/BGMVolumeSlider")
+sfx_volume_slider = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/SFXVolumeSlider")
+key_1_button = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/Key1ConfigButton")
+key_2_button = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/Key2ConfigButton")
+key_3_button = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/Key3ConfigButton")
+key_4_button = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/Key4ConfigButton")
+sfx_sound_player = NodePath("../../Audio/SFXSound")
+
+[node name="DeleteBeatmapLevel" type="Node" parent="Scripts" node_paths=PackedStringArray("delete_dialog")]
+script = ExtResource("13_b7cxu")
+delete_dialog = NodePath("../../DeleteDialog")
+
+[node name="KeyConfigChange" type="Node" parent="Scripts" node_paths=PackedStringArray("key_1_button", "key_2_button", "key_3_button", "key_4_button")]
+script = ExtResource("14_to6cl")
+key_1_button = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/Key1ConfigButton")
+key_2_button = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/Key2ConfigButton")
+key_3_button = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/Key3ConfigButton")
+key_4_button = NodePath("../../SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/Key4ConfigButton")
+
+[node name="OtherButtonFunction" type="Node" parent="Scripts" node_paths=PackedStringArray("pause_button", "preview_bgm", "auto_play_button")]
+script = ExtResource("15_fdaqo")
+pause_button = NodePath("../../UI/HBoxContainer/BeatmapList/VBoxContainer/HBoxContainer/PauseButton")
+preview_bgm = NodePath("../../Audio/PreviewBGM")
+auto_play_button = NodePath("../../UI/HBoxContainer/BeatmapList/VBoxContainer/HBoxContainer/AutoPlayButton")
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="SFXSound" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("12_is022")
+bus = &"SFX"
+
+[node name="PreviewBGM" type="AudioStreamPlayer" parent="Audio"]
+bus = &"BGM"
+
+[node name="Dialogs" type="Node" parent="."]
+
+[node name="AudioFileDialog" type="FileDialog" parent="Dialogs"]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(400, 200)
+ok_button_text = "打开"
+file_mode = 0
+access = 2
+root_subfolder = "./"
+filters = PackedStringArray("*.mp3")
+use_native_dialog = true
+
+[node name="MIDIFileDialog" type="FileDialog" parent="Dialogs"]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(400, 200)
+ok_button_text = "打开"
+file_mode = 0
+access = 2
+root_subfolder = "./"
+filters = PackedStringArray("*.mid")
+use_native_dialog = true
+
+[node name="CoverFileDialog" type="FileDialog" parent="Dialogs"]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(400, 200)
+ok_button_text = "打开"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.jpg", "*.png")
+use_native_dialog = true
+
+[connection signal="pressed" from="UI/HBoxContainer/BeatmapList/VBoxContainer/HBoxContainer/QuitButton" to="Scripts/OtherButtonFunction" method="_on_quit_button_pressed"]
+[connection signal="toggled" from="UI/HBoxContainer/BeatmapList/VBoxContainer/HBoxContainer/AutoPlayButton" to="Scripts/OtherButtonFunction" method="_on_auto_play_button_toggled"]
+[connection signal="pressed" from="UI/HBoxContainer/BeatmapList/VBoxContainer/HBoxContainer/PauseButton" to="Scripts/OtherButtonFunction" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/BeatmapList/VBoxContainer/HBoxContainer/AddButton" to="Scripts/EditBeatmapInfo" method="_on_add_button_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/MarginContainer3/CenterContainer/HBoxContainer/EditButton" to="Scripts/EditBeatmapInfo" method="_on_edit_button_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/MarginContainer3/CenterContainer/HBoxContainer/DeleteButton" to="Scripts/DeleteBeatmapLevel" method="_on_delete_button_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/BeatmapInfo/Panel/VBoxContainer/MarginContainer2/ScrollContainer/GridContainer/AddLevelButton" to="Scripts/AddLevel" method="_on_add_level_button_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/SettingButton" to="Scripts/SettingsChange" method="_on_setting_button_pressed"]
+[connection signal="pressed" from="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/CenterContainer/HBoxContainer/DialogOK" to="Scripts/EditBeatmapInfo" method="_on_dialog_ok_pressed"]
+[connection signal="pressed" from="EditBeatmapInfoDialog/CenterContainer/Panel/VBoxContainer/CenterContainer/HBoxContainer/DialogCancel" to="Scripts/EditBeatmapInfo" method="_on_dialog_cancel_pressed"]
+[connection signal="pressed" from="AddLevelDialog/CenterContainer/Panel/VBoxContainer/CenterContainer2/HBoxContainer/ImportAudioButton" to="Scripts/AddLevel" method="_on_import_audio_button_pressed"]
+[connection signal="pressed" from="AddLevelDialog/CenterContainer/Panel/VBoxContainer/CenterContainer2/HBoxContainer/ImpoetCoverButton" to="Scripts/AddLevel" method="_on_impoet_cover_button_pressed"]
+[connection signal="pressed" from="AddLevelDialog/CenterContainer/Panel/VBoxContainer/CenterContainer2/HBoxContainer/ImportBeatmapButton" to="Scripts/AddLevel" method="_on_import_beatmap_button_pressed"]
+[connection signal="pressed" from="AddLevelDialog/CenterContainer/Panel/VBoxContainer/CenterContainer/HBoxContainer/OKButton" to="Scripts/AddLevel" method="_on_ok_button_pressed"]
+[connection signal="pressed" from="AddLevelDialog/CenterContainer/Panel/VBoxContainer/CenterContainer/HBoxContainer/CancelButton" to="Scripts/AddLevel" method="_on_cancel_button_pressed"]
+[connection signal="value_changed" from="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/FallSpeedSlider" to="Scripts/SettingsChange" method="_on_fall_speed_slider_value_changed"]
+[connection signal="value_changed" from="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/MasterVolumeSlider" to="Scripts/SettingsChange" method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/BGMVolumeSlider" to="Scripts/SettingsChange" method="_on_bgm_volume_slider_value_changed"]
+[connection signal="value_changed" from="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/SFXVolumeSlider" to="Scripts/SettingsChange" method="_on_sfx_volume_slider_value_changed"]
+[connection signal="pressed" from="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/Key1ConfigButton" to="Scripts/KeyConfigChange" method="_on_key_1_config_button_pressed"]
+[connection signal="pressed" from="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/Key2ConfigButton" to="Scripts/KeyConfigChange" method="_on_key_2_config_button_pressed"]
+[connection signal="pressed" from="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/Key3ConfigButton" to="Scripts/KeyConfigChange" method="_on_key_3_config_button_pressed"]
+[connection signal="pressed" from="SettingDialog/CenterContainer/Panel/VBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer2/Key4ConfigButton" to="Scripts/KeyConfigChange" method="_on_key_4_config_button_pressed"]
+[connection signal="pressed" from="SettingDialog/CenterContainer/Panel/VBoxContainer/CenterContainer/HBoxContainer/OKButton" to="Scripts/SettingsChange" method="_on_ok_button_pressed"]
+[connection signal="pressed" from="DeleteDialog/CenterContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/DeleteYes" to="Scripts/DeleteBeatmapLevel" method="_on_delete_yes_pressed"]
+[connection signal="pressed" from="DeleteDialog/CenterContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/DeleteNo" to="Scripts/DeleteBeatmapLevel" method="_on_delete_no_pressed"]
+[connection signal="file_selected" from="Dialogs/AudioFileDialog" to="Scripts/AddLevel" method="_on_audio_file_dialog_file_selected"]
+[connection signal="file_selected" from="Dialogs/MIDIFileDialog" to="Scripts/AddLevel" method="_on_midi_file_dialog_file_selected"]
+[connection signal="file_selected" from="Dialogs/CoverFileDialog" to="Scripts/AddLevel" method="_on_cover_file_dialog_file_selected"]

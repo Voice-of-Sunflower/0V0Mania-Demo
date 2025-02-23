@@ -1,0 +1,217 @@
+[gd_scene load_steps=14 format=3 uid="uid://dktwtskhfnq3b"]
+
+[ext_resource type="Script" path="res://Scripts/UI/EndScreen/load_score_info.gd" id="1_ahefy"]
+[ext_resource type="LabelSettings" uid="uid://b3vymetrgr336" path="res://LabelSettings/perfect_label.tres" id="2_jd83d"]
+[ext_resource type="Script" path="res://Scripts/UI/EndScreen/button_function.gd" id="3_h5p8k"]
+
+[sub_resource type="Gradient" id="Gradient_syky8"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2rpm0"]
+gradient = SubResource("Gradient_syky8")
+
+[sub_resource type="LabelSettings" id="LabelSettings_5wulu"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_lgr5q"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_pkw6r"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_21nmu"]
+font_size = 40
+font_color = Color(1, 0.698039, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qyj7c"]
+font_size = 40
+font_color = Color(0, 1, 0.309804, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_318ar"]
+font_size = 40
+font_color = Color(0, 0.509804, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rox2o"]
+font_size = 40
+font_color = Color(0.717964, 0.717964, 0.717964, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hvkbf"]
+font_size = 50
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MusicInfo" type="Panel" parent="UI/MarginContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 135)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/MusicInfo"]
+self_modulate = Color(1, 1, 1, 0.380392)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_2rpm0")
+expand_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/MarginContainer/VBoxContainer/MusicInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/MusicInfo/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MusicTitle" type="Label" parent="UI/MarginContainer/VBoxContainer/MusicInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "{music_title}"
+label_settings = SubResource("LabelSettings_5wulu")
+
+[node name="LevelName" type="Label" parent="UI/MarginContainer/VBoxContainer/MusicInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "{level_name}"
+label_settings = SubResource("LabelSettings_lgr5q")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="ScoreInfo" type="Panel" parent="UI/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(600, 420)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Score" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Score : 1000000"
+label_settings = SubResource("LabelSettings_pkw6r")
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="PerfectCount" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "PERFECT : 0(0)"
+label_settings = SubResource("LabelSettings_21nmu")
+
+[node name="GreatCount" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "GREAT : 0"
+label_settings = SubResource("LabelSettings_qyj7c")
+
+[node name="GoodCount" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "GOOD : 0"
+label_settings = SubResource("LabelSettings_318ar")
+
+[node name="MissCount" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "MISS : 0"
+label_settings = SubResource("LabelSettings_rox2o")
+
+[node name="MaxCombo" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Max Combo : 999x"
+label_settings = SubResource("LabelSettings_hvkbf")
+horizontal_alignment = 1
+
+[node name="RatingInfo" type="Panel" parent="UI/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(540, 0)
+layout_mode = 2
+
+[node name="Rating" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/RatingInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "S"
+label_settings = ExtResource("2_jd83d")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="BackButton" type="Button" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "<- BACK"
+
+[node name="RetryButton" type="Button" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "RETRY"
+
+[node name="Scripts" type="Node" parent="."]
+
+[node name="LoadScoreInfo" type="Node" parent="Scripts" node_paths=PackedStringArray("music_title", "level_name", "perfect_count", "great_count", "good_count", "miss_count", "image", "score", "max_count", "rating")]
+script = ExtResource("1_ahefy")
+music_title = NodePath("../../UI/MarginContainer/VBoxContainer/MusicInfo/MarginContainer/VBoxContainer/MusicTitle")
+level_name = NodePath("../../UI/MarginContainer/VBoxContainer/MusicInfo/MarginContainer/VBoxContainer/LevelName")
+perfect_count = NodePath("../../UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer/CenterContainer/GridContainer/PerfectCount")
+great_count = NodePath("../../UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer/CenterContainer/GridContainer/GreatCount")
+good_count = NodePath("../../UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer/CenterContainer/GridContainer/GoodCount")
+miss_count = NodePath("../../UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer/CenterContainer/GridContainer/MissCount")
+image = NodePath("../../UI/MarginContainer/VBoxContainer/MusicInfo/Image")
+score = NodePath("../../UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer/Score")
+max_count = NodePath("../../UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer/MaxCombo")
+rating = NodePath("../../UI/MarginContainer/VBoxContainer/HBoxContainer/RatingInfo/Rating")
+
+[node name="ButtonFunction" type="Node" parent="Scripts"]
+script = ExtResource("3_h5p8k")
+
+[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/HBoxContainer2/BackButton" to="Scripts/ButtonFunction" method="_on_back_button_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/HBoxContainer2/RetryButton" to="Scripts/ButtonFunction" method="_on_retry_button_pressed"]
