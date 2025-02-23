@@ -1,7 +1,7 @@
 # NoteMania - 4K下落式音游Demo
 
-<img src= https://github.com/thefoxIncode/NoteMania-Demo/blob/main/Screenshots/1.png width="30%" /> <img src= https://github.com/thefoxIncode/NoteMania-Demo/blob/main/Screenshots/2.png width="30%" />
-<img src= https://github.com/thefoxIncode/NoteMania-Demo/blob/main/Screenshots/3.png width="30%" /> <img src= https://github.com/thefoxIncode/NoteMania-Demo/blob/main/Screenshots/4.png width="30%" />
+<img src= https://github.com/thefoxIncode/NoteMania-Demo/blob/main/Screenshots/1.png width="40%" /> <img src= https://github.com/thefoxIncode/NoteMania-Demo/blob/main/Screenshots/2.png width="40%" />
+<img src= https://github.com/thefoxIncode/NoteMania-Demo/blob/main/Screenshots/3.png width="40%" /> <img src= https://github.com/thefoxIncode/NoteMania-Demo/blob/main/Screenshots/4.png width="40%" />
 
 使用 Godot 4 引擎开发的4K下落式音乐游戏原型，支持MIDI谱面导入与自定义谱面制作。
 
