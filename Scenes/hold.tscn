@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5ktdkfdal61s"]
+
+[ext_resource type="Script" path="res://Scripts/Note/hold_fall.gd" id="1_2dr0x"]
+[ext_resource type="Script" path="res://Scripts/Note/hit_judge_hold.gd" id="3_kmblo"]
+
+[node name="Hold" type="Node2D" node_paths=PackedStringArray("hold_texture")]
+script = ExtResource("1_2dr0x")
+hold_texture = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 100.0
+offset_bottom = 50.0
+color = Color(0.663, 0.663, 0.663, 1)
+
+[node name="HitJudge" type="Node" parent="." node_paths=PackedStringArray("hold_texture", "hold")]
+script = ExtResource("3_kmblo")
+hold_texture = NodePath("../ColorRect")
+hold = NodePath("..")
