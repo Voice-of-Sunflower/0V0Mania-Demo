@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxumqplmbhxw8"]
+
+[ext_resource type="Script" uid="uid://bxo8xgivrpi8u" path="res://Scripts/Note/note_fall.gd" id="1_fymda"]
+[ext_resource type="Script" uid="uid://octmb5ibq35f" path="res://Scripts/Note/hit_judge.gd" id="2_7s81a"]
+
+[node name="Note" type="Node2D" node_paths=PackedStringArray("note_texture", "hit_judge_script")]
+script = ExtResource("1_fymda")
+note_texture = NodePath("ColorRect")
+hit_judge_script = NodePath("HitJudge")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 100.0
+offset_bottom = 50.0
+color = Color(0.663, 0.663, 0.663, 1)
+
+[node name="HitJudge" type="Node" parent="."]
+script = ExtResource("2_7s81a")
