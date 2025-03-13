@@ -4,6 +4,7 @@
 <img src= https://github.com/thefoxIncode/NoteMania-Demo/blob/main/Screenshots/3.png width="40%" /> <img src= https://github.com/thefoxIncode/NoteMania-Demo/blob/main/Screenshots/4.png width="40%" />
 
 使用 Godot 4 引擎开发的4K下落式音乐游戏原型，支持MIDI谱面导入与自定义谱面制作。
+
 视频演示地址：https://www.bilibili.com/video/BV1mWAfeGEWZ
 
 ## ℹ️ 项目中使用的插件
@@ -30,7 +31,8 @@
 
 ## 📥 安装与使用
 ### 依赖项
-- Godot 4.2.2+
+- Godot 4.2.2+ (v0.1.2 前)
+- Godot 4.4+ (v0.1.2 后)
 
 ### 快速开始
 1. 克隆本仓库
@@ -47,6 +49,11 @@
 - [ ] 开发可视化谱面编辑器
 
 ## 🏷️ 更新日志
+### v0.1.2
+- 修复了两个note间隔小于75ms时会发生叠判的问题
+- 修复了hold尾判出现的拖判问题
+- 更新引擎版本为 `Godot 4.4`
+
 ### v0.1.1
 - 添加了本地化，目前支持英文和简体中文
 - 添加谱面导出功能
