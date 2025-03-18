@@ -5,7 +5,7 @@
 
 使用 Godot 4 引擎开发的4K下落式音乐游戏原型，支持MIDI谱面导入与自定义谱面制作。
 
-视频演示地址：https://www.bilibili.com/video/BV1mWAfeGEWZ
+视频演示地址(v0.1.0)：https://www.bilibili.com/video/BV1mWAfeGEWZ
 
 ## ℹ️ 项目中使用的插件
 - [godot-midi-import](https://github.com/G0retZ/godot-midi-mport) - MIDI导入功能 by [G0retZ] (MIT License)
