@@ -10,3 +10,8 @@ func _on_level_button_pressed():
 	GlobalVariable.selected_level_name = level_button.text
 	GlobalVariable.selected_level_path = beatmap_path.path_join(selected_level)
 	GlobalVariable.selected_beatmap.set_play_button_visible()
+
+func _on_level_button_gui_input(event):
+	if event is InputEventMouse:
+		if event.button_mask == MOUSE_BUTTON_RIGHT:
+			GlobalVariable.show_delete_menu.emit()

@@ -1,0 +1,52 @@
+﻿id,en,zh
+OK,OK,确定
+CANCEL,Cancel,取消
+NO_BEATMAP_HINT,There are no beatmaps here! press the "+" button to add a beatmap.,这里还没有谱面！点击“+”键添加来一张谱面。
+QUIT,<- Quit,<- 退出
+AUTO_PLAY_OFF,Auto Play : OFF,自动播放：关闭
+AUTO_PLAY_ON,Auto Play : ON,自动播放：开启
+SETTING,Settings,设置
+LENGTH,Length: ,时长：
+EDIT,Edit,编辑
+DELETE,Delete,删除
+EXPORT,Export,导出
+EDIT_BEATMAP_INFO,Edit Beatmap Info,编辑谱面信息
+MUSIC_NAME,Name: ,曲名：
+ENTER_NAME_HINT,Enter the name...,请输入曲名...
+MUSIC_AUTHOR,Author:,作者：
+ENTER_AUTHOR_HINT,Enter the author...,请输入作者名...
+MUSIC_OFFSET,Offset: ,延迟：
+ENTER_BPM_HINT,Enter the bpm...,请输入BPM...
+ENTER_OFFSET_HINT,Enter the offset...,请输入曲名延迟...
+ADD_BEATMAP_LEVEL,Add Beatmap Level,添加谱面关卡
+AUDIO,Audio: ,音频：
+AUDIO_HINT,Select audio file...,请选择音频文件...
+COVER,Cover: ,封面：
+COVER_HINT,Select cover file...,请选择封面文件...
+BEATMAP_FILE,Beatmap:,谱面：
+BEATMAP_FILE_HINT,Select beatmap file...,请选择谱面文件...
+LEVEL_NAME,Level Name: ,关卡名字：
+LEVEL_NAME_HINT,Enter level name...,请输入关卡名...
+IMPORT_AUDIO,Import Audio,导入音频
+IMPORT_COVER,Import Cover,导入封面
+IMPORT_BEATMAP,Import Beatmap,导入谱面
+FALL_SPEED,Fall Speed,下落速度
+MASTER_VOLUME,Master Volume,主音量
+BGM_VOLUME,BGM Volume,BGM音量
+SFX_VOLUME,SFX Volume,音效音量
+JUDGE_OFFSET,Judge Offset,判定偏移
+KEY_1_CONFIG,Key1 Config,键位1
+KEY_2_CONFIG,Key2 Config,键位2
+KEY_3_CONFIG,Key3 Config,键位3
+KEY_4_CONFIG,Key4 Config,键位4
+LANGUAGE,Language,语言
+DELETE_HINT1,Are you sure?,你确定吗？
+DELETE_HINT2,This beatmap file is in pck format and cannot be deleted or modified.,此谱面文件为pck格式，无法删除和修改谱面。
+SCORE,Score : ,分数：
+MAX_COMBO,Max Combo : ,最大连击：
+BACK_BUTTON1,<- BACK,<- 返回
+BACK_BUTTON2,Back to menu,返回菜单
+RETRY_BUTTON1,RETRY,重试
+RETRY_BUTTON2,Retry,重试
+CONTINUE_BUTTON,Continue,继续
+GAME_PAUSE,Game Pause,游戏暂停

@@ -18,6 +18,8 @@ extends Node
 @export var key_3_button: Button
 @export var key_4_button: Button
 
+@export var language_button: Button
+
 @export var sfx_sound_player: AudioStreamPlayer
 
 func _on_setting_button_pressed():
@@ -41,6 +43,8 @@ func _on_setting_button_pressed():
 	key_3_button.text = GlobalSettings.key_3_config
 	key_4_button.text = GlobalSettings.key_4_config
 	
+	language_button.text = GlobalSettings.language
+	
 	setting_dialog.visible = true
 
 func _on_ok_button_pressed():
@@ -55,6 +59,8 @@ func _on_ok_button_pressed():
 	GlobalSettings.key_2_config = key_2_button.text
 	GlobalSettings.key_3_config = key_3_button.text
 	GlobalSettings.key_4_config = key_4_button.text
+	
+	GlobalSettings.language = language_button.text
 	
 	GlobalSettings.update_setting()
 	

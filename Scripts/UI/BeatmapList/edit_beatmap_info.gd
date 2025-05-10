@@ -1,6 +1,7 @@
 extends Node
 
 @export var edit_dialog: CanvasLayer
+@export var delete_hint: CanvasLayer
 
 @export var music_name_editor: LineEdit
 @export var music_author_editor: LineEdit
@@ -73,5 +74,8 @@ func _on_dialog_ok_pressed():
 	edit_dialog.visible = false
 
 func _on_edit_button_pressed():
+	if GlobalVariable.selected_beatmap_path.begins_with("res"):
+		delete_hint.visible = true
+		return
 	edit_info()
 	edit_dialog.visible = true

@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="NoteMania Framework"
+config/name="NoteMania Demo"
 config/version="0.0.1.0"
 run/main_scene="res://Scenes/beatmap_list_ui.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
@@ -32,6 +32,10 @@ window/stretch/mode="canvas_items"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/midi_import/plugin.cfg")
+
+[gui]
+
+theme/custom_font="res://Fonts/SourceHanSansSC-Medium-2.otf"
 
 [input]
 
@@ -60,6 +64,10 @@ key_stop_play={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://Localization/localization.en.translation", "res://Localization/localization.zh.translation")
 
 [physics]
 

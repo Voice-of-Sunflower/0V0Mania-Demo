@@ -21,6 +21,8 @@ signal level_name_change(level_name: String)
 signal preview_music()
 signal enter_beatmap_play_scene()
 signal continue_play(pause_duration: int)
+signal show_edit_menu()
+signal show_delete_menu()
 
 func _ready():
 	enter_beatmap_play_scene.connect(_on_enter_beatmap_play_scene)

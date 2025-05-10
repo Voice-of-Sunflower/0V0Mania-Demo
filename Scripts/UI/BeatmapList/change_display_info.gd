@@ -3,6 +3,8 @@ extends Node
 @export var music_item: Button
 @export var level_name: Label
 
+@export var music_file_loader: Node
+
 #var music_title_label: Label
 #var music_bpm_label: Label
 #var music_length_label: Label
@@ -36,20 +38,14 @@ func _on_music_item_pressed():
 	
 	## 将谱面封面赋值到全局变量中
 	GlobalVariable.beatmap_cover = music_item.cover_image
-	## 读取音频文件赋值到全局变量中
-	if FileAccess.file_exists(beatmap_path.path_join("music.mp3")):
-		var audio_file_data = FileAccess.get_file_as_bytes(beatmap_path.path_join("music.mp3"))
-		var audio_stream: AudioStream = AudioStreamMP3.new()
-		audio_stream.loop = false
-		audio_stream.data = audio_file_data
-		GlobalVariable.selected_beatmap_music = audio_stream
-	else :
-		GlobalVariable.selected_beatmap_music = null
-	
+
+	music_file_loader.file_load(beatmap_path)
+
+	GlobalVariable.preview_music.emit()
 	GlobalVariable.card_info_change.emit(music_item.is_cover_exist)
 	GlobalVariable.button_visible_change.emit()
 	GlobalVariable.load_levels.emit()
-	GlobalVariable.preview_music.emit()
+
 	
 	#add_level_button.visible = true
 	#beatmap_info_edit_button.visible = true
@@ -65,3 +61,7 @@ func _on_music_item_pressed():
 func _on_music_item_loading_finished():
 	beatmap_info = music_item.beatmap_info
 	
+func _on_music_item_gui_input(event):
+	if event is InputEventMouse:
+		if event.button_mask == MOUSE_BUTTON_RIGHT:
+			GlobalVariable.show_edit_menu.emit()

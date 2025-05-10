@@ -17,7 +17,7 @@ signal loading_finished
 
 func _ready():
 	load_info()
-	
+
 func load_info():
 	## 获取谱面信息
 	var file = FileAccess.open(beatmap_path.path_join("beatmap_info.json"), FileAccess.READ)

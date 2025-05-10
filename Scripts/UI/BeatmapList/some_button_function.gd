@@ -30,10 +30,10 @@ func _on_pause_button_pressed():
 ## 自动游玩
 func _on_auto_play_button_toggled(toggled_on):
 	if toggled_on:
-		auto_play_button.text = "Auto Play : ON"
+		auto_play_button.text = tr("AUTO_PLAY_ON")
 		GlobalVariable.auto_play_mode = true
 	else :
-		auto_play_button.text = "Auto Play : OFF"
+		auto_play_button.text = tr("AUTO_PLAY_OFF")
 		GlobalVariable.auto_play_mode = false
 
 ## 退出游戏

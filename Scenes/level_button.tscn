@@ -5,6 +5,8 @@
 [node name="LevelButton" type="Button"]
 custom_minimum_size = Vector2(150, 60)
 theme_override_font_sizes/font_size = 25
+action_mode = 0
+button_mask = 3
 text = "lv.{lv_name}"
 text_overrun_behavior = 3
 clip_text = true
@@ -13,4 +15,5 @@ clip_text = true
 script = ExtResource("1_abwid")
 level_button = NodePath("..")
 
+[connection signal="gui_input" from="." to="SetSelectLevel" method="_on_level_button_gui_input"]
 [connection signal="pressed" from="." to="SetSelectLevel" method="_on_level_button_pressed"]

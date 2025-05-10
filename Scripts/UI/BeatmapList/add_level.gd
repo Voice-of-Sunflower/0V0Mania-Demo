@@ -4,6 +4,7 @@ extends Node
 @export var select_audio_file_dialog: FileDialog
 @export var select_midi_file_dialog: FileDialog
 @export var select_cover_file_dialog: FileDialog
+@export var delete_hint: CanvasLayer
 
 @export var audio_file_text_edit: LineEdit
 @export var beatmap_file_edit: LineEdit
@@ -18,6 +19,9 @@ var beatmap_info: Dictionary
 ## 右边关卡列表的“+”按钮对应的函数
 func _on_add_level_button_pressed():
 	beatmap_path = GlobalVariable.selected_beatmap_path
+	if beatmap_path.begins_with("res"):
+		delete_hint.visible = true
+		return
 	edit_level_info_dialog.visible = true
 	
 	if FileAccess.file_exists(beatmap_path.path_join("music.mp3")):

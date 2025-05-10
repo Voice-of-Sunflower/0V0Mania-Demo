@@ -13,6 +13,8 @@ var key_2_config: String = "F"
 var key_3_config: String = "J"
 var key_4_config: String = "K"
 
+var language: String = "en"
+
 func _ready():
 	if FileAccess.file_exists("./settings.json"):
 		var file = FileAccess.open("./settings.json", FileAccess.READ)
@@ -35,12 +37,16 @@ func _ready():
 		key_3_config = settings["Key3"]
 		key_4_config = settings["Key4"]
 		
+		language = settings["Language"]
+		TranslationServer.set_locale(language)
+		
 		set_key_config("Key_1", key_1_config)
 		set_key_config("Key_2", key_2_config)
 		set_key_config("Key_3", key_3_config)
 		set_key_config("Key_4", key_4_config)
 		
 	else :
+		language = set_localize()
 		update_setting()
 
 func update_setting():
@@ -53,20 +59,13 @@ func update_setting():
 		"Key1": get_key_name("Key_1"),
 		"Key2": get_key_name("Key_2"),
 		"Key3": get_key_name("Key_3"),
-		"Key4": get_key_name("Key_4") }
+		"Key4": get_key_name("Key_4"),
+		"Language": language }
 	
 	var file = FileAccess.open("./settings.json", FileAccess.WRITE)
 	var data = JSON.stringify(settings, "\t")
 	file.store_string(data)
 	file.close()
-
-func reset_setting():
-	set_key_config("Key_1", "D")
-	set_key_config("Key_2", "F")
-	set_key_config("Key_3", "J")
-	set_key_config("Key_4", "K")
-	
-	update_setting()
 
 func get_key_name(action_name: StringName):
 	for event in InputMap.action_get_events(action_name):
@@ -78,3 +77,14 @@ func set_key_config(action_name: StringName, key_name: String):
 	var new_key = InputEventKey.new()
 	new_key.physical_keycode = OS.find_keycode_from_string(key_name)
 	InputMap.action_add_event(action_name, new_key)
+
+## 自动本地化设置
+func set_localize() -> String:
+	var language = "automatic"
+	if language == "automatic":
+		var preferred_language = OS.get_locale_language()
+		TranslationServer.set_locale(preferred_language)
+		return preferred_language
+	else:
+		TranslationServer.set_locale("en")
+		return "en"

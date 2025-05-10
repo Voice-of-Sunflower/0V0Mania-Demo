@@ -19,7 +19,7 @@ func _ready():
 func _on_load_beatmap_list():
 	reload_beatmap_list()
 
-## 实例化谱面为物体
+## 实例化谱面按钮
 func add_music_item(path: String):
 	var music_item_obj: Button = music_info_item.instantiate()
 	music_item_obj.beatmap_path = path
@@ -42,4 +42,12 @@ func reload_beatmap_list():
 	for directory in directories:
 		var path = beatmaps_path.path_join(directory)
 		if FileAccess.file_exists(path.path_join("beatmap_info.json")):
+			add_music_item(path)
+	
+	## 读取pck打包文件
+	var beatmap_packs = DirAccess.open(beatmaps_path).get_files()
+	for pack in beatmap_packs:
+		if pack.get_extension() == "pck":
+			ProjectSettings.load_resource_pack(beatmaps_path.path_join(pack))
+			var path: String = "res://Beatmaps/" + pack.get_basename()
 			add_music_item(path)

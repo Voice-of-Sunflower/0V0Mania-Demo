@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c1k5k0mahf4se"]
+[gd_scene load_steps=9 format=3 uid="uid://c1k5k0mahf4se"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Buttons/music_item_init.gd" id="1_s2hwm"]
 [ext_resource type="Script" path="res://Scripts/UI/BeatmapList/change_display_info.gd" id="3_8mgjj"]
 [ext_resource type="Script" path="res://Scripts/UI/Buttons/change_to_play_scene.gd" id="4_ixvl5"]
+[ext_resource type="Script" path="res://Scripts/UI/Buttons/music_file_loader.gd" id="4_pgmly"]
 
 [sub_resource type="Gradient" id="Gradient_ppixp"]
 
@@ -21,6 +22,8 @@ custom_minimum_size = Vector2(775, 120)
 offset_left = 2.0
 offset_right = 777.0
 offset_bottom = 120.0
+action_mode = 0
+button_mask = 3
 script = ExtResource("1_s2hwm")
 music_title = NodePath("HBoxContainer/MarginContainer2/VBoxContainer/ScrollContainer/MusicTitle")
 level_title = NodePath("HBoxContainer/MarginContainer2/VBoxContainer/LevelName")
@@ -92,21 +95,26 @@ theme_override_constants/margin_right = 20
 
 [node name="PlayButton" type="Button" parent="MarginContainer"]
 visible = false
-custom_minimum_size = Vector2(100, 50)
+custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 30
 text = "Play"
 
 [node name="Scripts" type="Node" parent="."]
 
-[node name="ChangeDisplayInfo" type="Node" parent="Scripts" node_paths=PackedStringArray("music_item", "level_name")]
+[node name="ChangeDisplayInfo" type="Node" parent="Scripts" node_paths=PackedStringArray("music_item", "level_name", "music_file_loader")]
 script = ExtResource("3_8mgjj")
 music_item = NodePath("../..")
 level_name = NodePath("../../HBoxContainer/MarginContainer2/VBoxContainer/LevelName")
+music_file_loader = NodePath("../MusicFileLoader")
 
 [node name="ChangeToPlayScene" type="Node" parent="Scripts"]
 script = ExtResource("4_ixvl5")
 
+[node name="MusicFileLoader" type="Node" parent="Scripts"]
+script = ExtResource("4_pgmly")
+
+[connection signal="gui_input" from="." to="Scripts/ChangeDisplayInfo" method="_on_music_item_gui_input"]
 [connection signal="loading_finished" from="." to="Scripts/ChangeDisplayInfo" method="_on_music_item_loading_finished"]
 [connection signal="pressed" from="." to="Scripts/ChangeDisplayInfo" method="_on_music_item_pressed"]
 [connection signal="pressed" from="MarginContainer/PlayButton" to="Scripts/ChangeToPlayScene" method="_on_play_button_pressed"]

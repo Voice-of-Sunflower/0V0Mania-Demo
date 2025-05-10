@@ -15,8 +15,8 @@ extends Node
 @export var rating: Label
 
 const music_title_text: String = "{0} - {1}"
-const score_text: String = "Score : {0}"
-const max_combo_text: String = "Max Combo : {0}x"
+var score_text: String = tr("SCORE") + "{0}"
+var max_combo_text: String = tr("MAX_COMBO") + "{0}x"
 const perfect_count_text: String = "PERFECT : {0}({1})"
 const great_count_text: String = "GREAT: {0}"
 const good_count_text: String = "GOOD: {0}"

@@ -124,7 +124,7 @@ theme_override_constants/separation = 30
 
 [node name="Score" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Score : 1000000"
+text = "SCORE : 1000000"
 label_settings = SubResource("LabelSettings_pkw6r")
 horizontal_alignment = 1
 
@@ -159,7 +159,7 @@ label_settings = SubResource("LabelSettings_rox2o")
 
 [node name="MaxCombo" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/ScoreInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Max Combo : 999x"
+text = "MAX_COMBO : 999x"
 label_settings = SubResource("LabelSettings_hvkbf")
 horizontal_alignment = 1
 
@@ -187,13 +187,13 @@ theme_override_constants/separation = 30
 custom_minimum_size = Vector2(150, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "<- BACK"
+text = "BACK_BUTTON1"
 
 [node name="RetryButton" type="Button" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(150, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "RETRY"
+text = "RETRY_BUTTON1"
 
 [node name="Scripts" type="Node" parent="."]
 

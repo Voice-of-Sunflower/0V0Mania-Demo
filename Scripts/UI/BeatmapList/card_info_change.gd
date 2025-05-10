@@ -9,7 +9,6 @@ extends Node
 
 const music_title_text: String = "{0} - {1}"
 const music_bpm_text: String = "BPM: {0}"
-const music_length_text: String = "Length: {0}"
 
 var beatmap_info: Dictionary
 var music_stream: AudioStream
@@ -25,6 +24,7 @@ func _on_card_info_change(is_artwork_exist: bool):
 	## 获取音频流
 	music_stream = GlobalVariable.selected_beatmap_music
 	if music_stream:
+		var music_length_text: String = tr("LENGTH") + "{0}"
 		var length = int(music_stream.get_length())
 		music_len.text = music_length_text.format({"0": convert_time(length)})
 	else :
@@ -43,9 +43,9 @@ func _on_preview_bgm_start():
 		music_fade_out()
 		await get_tree().create_timer(1.5).timeout
 		preview_bgm.stop()
-	
+
 	if preview_bgm.playing:
-		if preview_bgm.stream == GlobalVariable.selected_beatmap_music:
+		if beatmap_info["Name"] == GlobalVariable.selected_beatmap_info["Name"]:
 			return
 		else :
 			music_fade_out()

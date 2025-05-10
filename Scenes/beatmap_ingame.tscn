@@ -479,7 +479,7 @@ theme_override_constants/separation = 30
 
 [node name="Label" type="Label" parent="StopMenu/CenterContainer/Panel/VBoxContainer"]
 layout_mode = 2
-text = "Game Pause"
+text = "GAME_PAUSE"
 label_settings = SubResource("LabelSettings_0m1wb")
 horizontal_alignment = 1
 
@@ -500,17 +500,17 @@ theme_override_constants/separation = 25
 
 [node name="MasterVolumeLabel" type="Label" parent="StopMenu/CenterContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Master Volume"
+text = "MASTER_VOLUME"
 label_settings = SubResource("LabelSettings_u4g0h")
 
 [node name="BGMVolumeLabel" type="Label" parent="StopMenu/CenterContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "BGM Volume"
+text = "BGM_VOLUME"
 label_settings = SubResource("LabelSettings_u4g0h")
 
 [node name="SFXVolumeLabel" type="Label" parent="StopMenu/CenterContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "SFX Volume"
+text = "SFX_VOLUME"
 label_settings = SubResource("LabelSettings_u4g0h")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="StopMenu/CenterContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -571,19 +571,19 @@ theme_override_constants/separation = 30
 custom_minimum_size = Vector2(150, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Continue"
+text = "CONTINUE_BUTTON"
 
 [node name="RetryButton" type="Button" parent="StopMenu/CenterContainer/Panel/VBoxContainer/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Retry"
+text = "RETRY_BUTTON2"
 
 [node name="BackButton" type="Button" parent="StopMenu/CenterContainer/Panel/VBoxContainer/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Back to menu"
+text = "BACK_BUTTON2"
 
 [node name="Scripts" type="Node" parent="."]
 
