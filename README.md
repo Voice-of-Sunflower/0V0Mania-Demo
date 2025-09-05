@@ -1,11 +1,10 @@
-# NoteMania - 4K下落式音游Demo
-### This document is only Chinese now
+# 0v0Mania - 类似于 osu!mania 的 4K 下落式音游Demo
+### 以下内容为 v0.2.0 介绍，v0.4.0 正在施工
 <img src= https://github.com/thefoxIncode/NoteMania-Demo/blob/main/Screenshots/1.png width="40%" /> <img src= https://github.com/thefoxIncode/NoteMania-Demo/blob/main/Screenshots/2.png width="40%" />
 <img src= https://github.com/thefoxIncode/NoteMania-Demo/blob/main/Screenshots/3.png width="40%" /> <img src= https://github.com/thefoxIncode/NoteMania-Demo/blob/main/Screenshots/4.png width="40%" />
 
 使用 Godot 4 引擎开发的4K下落式音乐游戏原型，支持MIDI谱面导入与自定义谱面制作。
 
-视频演示地址(v0.1.0)：https://www.bilibili.com/video/BV1mWAfeGEWZ
 
 ## ℹ️ 项目中使用的插件
 - [godot-midi-import](https://github.com/G0retZ/godot-midi-mport) - MIDI导入功能 by [G0retZ] (MIT License)
