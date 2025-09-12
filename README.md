@@ -64,7 +64,10 @@
     *   确保您已安装 [Godot 4.4.1](https://godotengine.org/download/)。
     *   使用 Godot 编辑器打开项目文件夹 (`project.godot` 文件)。
 
-3.  **运行**:
+3.  **进行必要的设置调整**
+    *   在节点 `Scripts/SimpleSetting` 中调整游戏设置，特别是语言 (游戏启动后无法再调整)。
+
+4.  **运行**:
     *   在编辑器中直接点击 `运行` 按钮进行测试。
 
 ## 📦 第三方组件
