@@ -1,6 +1,6 @@
 # 0v0Mania - 类似于 osu!mania 的 4K 下落式音游Demo
-<img src= https://github.com/Voice-of-Sunflower/0V0Mania-Demo/blob/0.4.0-alpha/Screenshots/0.4.0%20screenshot%201.png width="30%" /> <img src= https://github.com/Voice-of-Sunflower/0V0Mania-Demo/blob/0.4.0-alpha/Screenshots/0.4.0%20screenshot%202.png width="30%" />
-<img src= https://github.com/Voice-of-Sunflower/0V0Mania-Demo/blob/0.4.0-alpha/Screenshots/0.4.0%20screenshot%203.png width="30%" />
+<img src= https://github.com/Voice-of-Sunflower/0V0Mania-Demo/blob/0.4.0-alpha/Screenshots/0.4.0%20screenshot%201.png width="33%" /> <img src= https://github.com/Voice-of-Sunflower/0V0Mania-Demo/blob/0.4.0-alpha/Screenshots/0.4.0%20screenshot%202.png width="33%" />
+<img src= https://github.com/Voice-of-Sunflower/0V0Mania-Demo/blob/0.4.0-alpha/Screenshots/0.4.0%20screenshot%203.png width="33%" />
 
 **v0.4.0版本视频演示地址（哔哩哔哩）**：https://b23.tv/c9IYgM5
 
