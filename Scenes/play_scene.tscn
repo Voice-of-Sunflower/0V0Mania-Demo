@@ -1,0 +1,868 @@
+[gd_scene load_steps=32 format=3 uid="uid://cje3r6hmqmtyi"]
+
+[ext_resource type="StyleBox" uid="uid://cyxe3exf8uwci" path="res://Resources/StyleBox/track_style_box.tres" id="1_j3qlu"]
+[ext_resource type="Material" uid="uid://bs7w7s6g0e4g1" path="res://Resources/Shader/key_visual_shader.tres" id="2_fbpj1"]
+[ext_resource type="StyleBox" uid="uid://cbo7n6ck1vmdc" path="res://Resources/StyleBox/key_style_box.tres" id="3_3cjv5"]
+[ext_resource type="Script" uid="uid://n3gvg53i0gpw" path="res://Scripts/InGame/class_key.gd" id="4_2kn3l"]
+[ext_resource type="Script" uid="uid://b8o0yb6b1y7c0" path="res://Scripts/InGame/class_track.gd" id="5_8n5jp"]
+[ext_resource type="Script" uid="uid://bfnqrm7ugk8er" path="res://Scripts/InGame/simple_setting.gd" id="7_3cjv5"]
+[ext_resource type="Script" uid="uid://cnf1ibb7x1xdl" path="res://Scripts/UI/InGame/game_ui.gd" id="7_8n5jp"]
+[ext_resource type="Script" uid="uid://cf568tslj7qbh" path="res://Scripts/InGame/class_data_loader.gd" id="7_lneu0"]
+[ext_resource type="Script" uid="uid://byu58buv72ee5" path="res://Scripts/InGame/game_manager.gd" id="8_2kn3l"]
+[ext_resource type="Script" uid="uid://b4dm81bwe0i7y" path="res://Scripts/InGame/class_judge_manager.gd" id="8_3wskg"]
+[ext_resource type="Script" uid="uid://crfhssbf3e2iv" path="res://Scripts/InGame/time_manager.gd" id="9_3cjv5"]
+[ext_resource type="Script" uid="uid://cfwakn61pbmer" path="res://Scripts/InGame/class_track_manager.gd" id="9_s0476"]
+[ext_resource type="Script" uid="uid://b7rjyv1hqjif6" path="res://Scripts/InGame/class_audio_manager.gd" id="11_cqpud"]
+[ext_resource type="Script" uid="uid://dvdxfvu4sj7u2" path="res://Scripts/InGame/class_score_manager.gd" id="13_10s6a"]
+[ext_resource type="Script" uid="uid://4rqe620d1udo" path="res://Scripts/InGame/class_note_pool.gd" id="14_0jq4l"]
+[ext_resource type="AudioStream" uid="uid://cmd6h5oh2nxof" path="res://Sounds/hitsound.wav" id="21_lneu0"]
+
+[sub_resource type="FontVariation" id="FontVariation_j3qlu"]
+spacing_glyph = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_j3qlu"]
+font = SubResource("FontVariation_j3qlu")
+font_size = 35
+shadow_color = Color(0, 0, 0, 0.568627)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Gradient" id="Gradient_fbpj1"]
+colors = PackedColorArray(0, 0, 0, 0.54902, 0, 0, 0, 0.54902)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3cjv5"]
+gradient = SubResource("Gradient_fbpj1")
+width = 1280
+height = 10
+
+[sub_resource type="Gradient" id="Gradient_j3qlu"]
+colors = PackedColorArray(0.676466, 0.676466, 0.676466, 1, 0.676466, 0.676466, 0.676466, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fbpj1"]
+gradient = SubResource("Gradient_j3qlu")
+width = 1280
+height = 10
+
+[sub_resource type="FontVariation" id="FontVariation_8n5jp"]
+variation_embolden = 0.25
+spacing_glyph = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_yglu3"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_8n5jp"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_6w285"]
+font_size = 35
+
+[sub_resource type="LabelSettings" id="LabelSettings_4qg1e"]
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_d3awe"]
+font_size = 25
+
+[sub_resource type="FontVariation" id="FontVariation_2kn3l"]
+spacing_glyph = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_2kn3l"]
+font = SubResource("FontVariation_2kn3l")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_3cjv5"]
+font_size = 22
+
+[node name="PlayScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OtherUI" type="Control" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ScoreLabel" type="Label" parent="OtherUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 80.0
+grow_horizontal = 0
+text = "0000000"
+label_settings = SubResource("LabelSettings_j3qlu")
+horizontal_alignment = 2
+
+[node name="ProgressBar" type="TextureProgressBar" parent="OtherUI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 10.0
+grow_horizontal = 2
+max_value = 1000.0
+texture_under = SubResource("GradientTexture2D_3cjv5")
+texture_progress = SubResource("GradientTexture2D_fbpj1")
+
+[node name="PauseButton" type="Button" parent="OtherUI"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+offset_top = 10.0
+offset_right = 150.0
+offset_bottom = 70.0
+theme_override_fonts/font = SubResource("FontVariation_8n5jp")
+theme_override_font_sizes/font_size = 25
+text = "PAUSE_BUTTON"
+
+[node name="Debug" type="Control" parent="OtherUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OtherUI/Debug"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -350.0
+offset_top = 160.0
+offset_right = -50.0
+offset_bottom = 460.0
+grow_horizontal = 0
+
+[node name="MarvelousLabel" type="Label" parent="OtherUI/Debug/VBoxContainer"]
+layout_mode = 2
+text = "MARVELOUS: {0}"
+label_settings = SubResource("LabelSettings_yglu3")
+
+[node name="PerfectLabel" type="Label" parent="OtherUI/Debug/VBoxContainer"]
+layout_mode = 2
+text = "PERFECT: {0}"
+label_settings = SubResource("LabelSettings_yglu3")
+
+[node name="GreatLabel" type="Label" parent="OtherUI/Debug/VBoxContainer"]
+layout_mode = 2
+text = "GREAT: {0}"
+label_settings = SubResource("LabelSettings_yglu3")
+
+[node name="GoodLabel" type="Label" parent="OtherUI/Debug/VBoxContainer"]
+layout_mode = 2
+text = "GOOD: {0}"
+label_settings = SubResource("LabelSettings_yglu3")
+
+[node name="MissLabel" type="Label" parent="OtherUI/Debug/VBoxContainer"]
+layout_mode = 2
+text = "MISS: {0}"
+label_settings = SubResource("LabelSettings_yglu3")
+
+[node name="AccuracyLabel" type="Label" parent="OtherUI/Debug/VBoxContainer"]
+layout_mode = 2
+text = "ACC: {0} %"
+label_settings = SubResource("LabelSettings_yglu3")
+
+[node name="DebugButton" type="Button" parent="OtherUI/Debug"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.113
+anchor_top = 0.417
+anchor_right = 0.113
+anchor_bottom = 0.417
+offset_left = -74.64
+offset_top = -30.24
+offset_right = 75.36
+offset_bottom = 29.76
+theme_override_font_sizes/font_size = 30
+text = "DEBUG_B"
+
+[node name="SelectFileButton" type="Button" parent="OtherUI/Debug"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.27
+anchor_top = 0.417
+anchor_right = 0.27
+anchor_bottom = 0.417
+offset_left = -75.6
+offset_top = -30.24
+offset_right = 74.4
+offset_bottom = 29.76
+theme_override_font_sizes/font_size = 30
+text = "FILE_B"
+
+[node name="AutoPlayButton" type="Button" parent="OtherUI/Debug"]
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.198
+anchor_top = 0.847
+anchor_right = 0.198
+anchor_bottom = 0.847
+offset_left = -93.44
+offset_top = -29.84
+offset_right = 94.56
+offset_bottom = 30.16
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+text = "AUTO_OFF"
+
+[node name="ResetButton" type="Button" parent="OtherUI/Debug"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.801
+anchor_top = 0.736
+anchor_right = 0.801
+anchor_bottom = 0.736
+offset_left = -75.28
+offset_top = -29.92
+offset_right = 74.72
+offset_bottom = 30.08
+theme_override_font_sizes/font_size = 30
+text = "RESET_B"
+
+[node name="NotesInfo" type="VBoxContainer" parent="OtherUI/Debug"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 360.0
+offset_right = 380.0
+offset_bottom = 515.0
+
+[node name="TapCount" type="Label" parent="OtherUI/Debug/NotesInfo"]
+layout_mode = 2
+text = "Tap: {0}"
+label_settings = SubResource("LabelSettings_8n5jp")
+
+[node name="HoldCount" type="Label" parent="OtherUI/Debug/NotesInfo"]
+layout_mode = 2
+text = "Hold: {0}"
+label_settings = SubResource("LabelSettings_8n5jp")
+
+[node name="TotalCount" type="Label" parent="OtherUI/Debug/NotesInfo"]
+layout_mode = 2
+text = "Total: {0}"
+label_settings = SubResource("LabelSettings_8n5jp")
+
+[node name="AudioLength" type="Label" parent="OtherUI/Debug/NotesInfo"]
+layout_mode = 2
+text = "Length: %d : %02d"
+label_settings = SubResource("LabelSettings_8n5jp")
+
+[node name="TrackUI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="JudgeLine" type="ColorRect" parent="TrackUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = 270.0
+offset_right = 170.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.706303, 0.706303, 0.706303, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="TrackUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Visual" type="VBoxContainer" parent="TrackUI/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Tracks" type="HBoxContainer" parent="TrackUI/CenterContainer/Visual"]
+z_index = -3
+custom_minimum_size = Vector2(0, 720)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Track1" type="Panel" parent="TrackUI/CenterContainer/Visual/Tracks"]
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_j3qlu")
+
+[node name="Key1" type="Panel" parent="TrackUI/CenterContainer/Visual/Tracks/Track1" node_paths=PackedStringArray("countdown_timer", "key_hint")]
+z_index = 2
+material = ExtResource("2_fbpj1")
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -42.5
+offset_top = -85.0
+offset_right = 42.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("3_3cjv5")
+script = ExtResource("4_2kn3l")
+countdown_timer = NodePath("../../../../../../Timers/GenerateTimer")
+key_hint = NodePath("Label")
+metadata/_custom_type_script = "uid://n3gvg53i0gpw"
+
+[node name="Label" type="Label" parent="TrackUI/CenterContainer/Visual/Tracks/Track1/Key1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "D"
+label_settings = SubResource("LabelSettings_6w285")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Track2" type="Panel" parent="TrackUI/CenterContainer/Visual/Tracks"]
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_j3qlu")
+
+[node name="Key2" type="Panel" parent="TrackUI/CenterContainer/Visual/Tracks/Track2" node_paths=PackedStringArray("countdown_timer", "key_hint")]
+z_index = 2
+material = ExtResource("2_fbpj1")
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -42.5
+offset_top = -85.0
+offset_right = 42.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("3_3cjv5")
+script = ExtResource("4_2kn3l")
+countdown_timer = NodePath("../../../../../../Timers/GenerateTimer")
+key_hint = NodePath("Label")
+metadata/_custom_type_script = "uid://n3gvg53i0gpw"
+
+[node name="Label" type="Label" parent="TrackUI/CenterContainer/Visual/Tracks/Track2/Key2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "F"
+label_settings = SubResource("LabelSettings_6w285")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Track3" type="Panel" parent="TrackUI/CenterContainer/Visual/Tracks"]
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_j3qlu")
+
+[node name="Key3" type="Panel" parent="TrackUI/CenterContainer/Visual/Tracks/Track3" node_paths=PackedStringArray("countdown_timer", "key_hint")]
+z_index = 2
+material = ExtResource("2_fbpj1")
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -42.5
+offset_top = -85.0
+offset_right = 42.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("3_3cjv5")
+script = ExtResource("4_2kn3l")
+countdown_timer = NodePath("../../../../../../Timers/GenerateTimer")
+key_hint = NodePath("Label")
+metadata/_custom_type_script = "uid://n3gvg53i0gpw"
+
+[node name="Label" type="Label" parent="TrackUI/CenterContainer/Visual/Tracks/Track3/Key3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "J"
+label_settings = SubResource("LabelSettings_6w285")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 2
+
+[node name="Track4" type="Panel" parent="TrackUI/CenterContainer/Visual/Tracks"]
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_j3qlu")
+
+[node name="Key4" type="Panel" parent="TrackUI/CenterContainer/Visual/Tracks/Track4" node_paths=PackedStringArray("countdown_timer", "key_hint")]
+z_index = 2
+material = ExtResource("2_fbpj1")
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -42.5
+offset_top = -85.0
+offset_right = 42.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("3_3cjv5")
+script = ExtResource("4_2kn3l")
+countdown_timer = NodePath("../../../../../../Timers/GenerateTimer")
+key_hint = NodePath("Label")
+metadata/_custom_type_script = "uid://n3gvg53i0gpw"
+
+[node name="Label" type="Label" parent="TrackUI/CenterContainer/Visual/Tracks/Track4/Key4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "K"
+label_settings = SubResource("LabelSettings_6w285")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Generator" type="CenterContainer" parent="TrackUI/CenterContainer"]
+layout_mode = 2
+
+[node name="Tracks" type="HBoxContainer" parent="TrackUI/CenterContainer/Generator"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Track1" type="Control" parent="TrackUI/CenterContainer/Generator/Tracks" node_paths=PackedStringArray("game_manager", "time_manager", "track_manager", "judge_manager", "note_pool")]
+custom_minimum_size = Vector2(85, 720)
+layout_mode = 2
+script = ExtResource("5_8n5jp")
+game_manager = NodePath("../../../../../Scripts/GameManager")
+time_manager = NodePath("../../../../../Scripts/TimeManager")
+track_manager = NodePath("../../../../../Scripts/TrackManager")
+judge_manager = NodePath("../../../../../Scripts/JudgeManager")
+note_pool = NodePath("../../../../../Scripts/NoteObjectPool")
+metadata/_custom_type_script = "uid://b8o0yb6b1y7c0"
+
+[node name="Track2" type="Control" parent="TrackUI/CenterContainer/Generator/Tracks" node_paths=PackedStringArray("game_manager", "time_manager", "track_manager", "judge_manager", "note_pool")]
+custom_minimum_size = Vector2(85, 720)
+layout_mode = 2
+script = ExtResource("5_8n5jp")
+game_manager = NodePath("../../../../../Scripts/GameManager")
+time_manager = NodePath("../../../../../Scripts/TimeManager")
+track_manager = NodePath("../../../../../Scripts/TrackManager")
+judge_manager = NodePath("../../../../../Scripts/JudgeManager")
+note_pool = NodePath("../../../../../Scripts/NoteObjectPool")
+metadata/_custom_type_script = "uid://b8o0yb6b1y7c0"
+
+[node name="Track3" type="Control" parent="TrackUI/CenterContainer/Generator/Tracks" node_paths=PackedStringArray("game_manager", "time_manager", "track_manager", "judge_manager", "note_pool")]
+custom_minimum_size = Vector2(85, 720)
+layout_mode = 2
+script = ExtResource("5_8n5jp")
+game_manager = NodePath("../../../../../Scripts/GameManager")
+time_manager = NodePath("../../../../../Scripts/TimeManager")
+track_manager = NodePath("../../../../../Scripts/TrackManager")
+judge_manager = NodePath("../../../../../Scripts/JudgeManager")
+note_pool = NodePath("../../../../../Scripts/NoteObjectPool")
+metadata/_custom_type_script = "uid://b8o0yb6b1y7c0"
+
+[node name="Track4" type="Control" parent="TrackUI/CenterContainer/Generator/Tracks" node_paths=PackedStringArray("game_manager", "time_manager", "track_manager", "judge_manager", "note_pool")]
+custom_minimum_size = Vector2(85, 720)
+layout_mode = 2
+script = ExtResource("5_8n5jp")
+game_manager = NodePath("../../../../../Scripts/GameManager")
+time_manager = NodePath("../../../../../Scripts/TimeManager")
+track_manager = NodePath("../../../../../Scripts/TrackManager")
+judge_manager = NodePath("../../../../../Scripts/JudgeManager")
+note_pool = NodePath("../../../../../Scripts/NoteObjectPool")
+metadata/_custom_type_script = "uid://b8o0yb6b1y7c0"
+
+[node name="ComboLabel" type="Label" parent="TrackUI"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.451
+anchor_right = 0.5
+anchor_bottom = 0.451
+offset_left = -90.0
+offset_top = 25.28
+offset_right = 91.0
+offset_bottom = 75.28
+text = "0"
+label_settings = SubResource("LabelSettings_4qg1e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RatingLabel" type="Label" parent="TrackUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.521
+anchor_right = 0.5
+anchor_bottom = 0.521
+offset_left = -90.0
+offset_top = 24.88
+offset_right = 91.0
+offset_bottom = 74.88
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(90.5, 25)
+label_settings = SubResource("LabelSettings_d3awe")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseUI" type="Control" parent="."]
+process_mode = 2
+visible = false
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DimBackground" type="ColorRect" parent="PauseUI"]
+self_modulate = Color(1, 1, 1, 0.431373)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -197.5
+offset_top = -161.5
+offset_right = 197.5
+offset_bottom = 161.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="PauseUI/VBoxContainer"]
+layout_mode = 2
+text = "GAME_PAUSE"
+label_settings = SubResource("LabelSettings_2kn3l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseUI/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseUI/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="ContinueButton" type="Button" parent="PauseUI/VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "CONTINUE_BUTTON"
+
+[node name="ReloadButton" type="Button" parent="PauseUI/VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "RELOAD_BUTTON"
+
+[node name="Scripts" type="Node" parent="."]
+
+[node name="SimpleSetting" type="Node" parent="Scripts"]
+script = ExtResource("7_3cjv5")
+
+[node name="DataLoader" type="Node" parent="Scripts" node_paths=PackedStringArray("track_manager", "judge_manager", "audio_manager", "score_manager")]
+script = ExtResource("7_lneu0")
+track_manager = NodePath("../TrackManager")
+judge_manager = NodePath("../JudgeManager")
+audio_manager = NodePath("../AudioManager")
+score_manager = NodePath("../ScoreManager")
+metadata/_custom_type_script = "uid://cf568tslj7qbh"
+
+[node name="GameManager" type="Node" parent="Scripts" node_paths=PackedStringArray("ui_manager", "time_manager", "audio_manager")]
+process_mode = 3
+script = ExtResource("8_2kn3l")
+ui_manager = NodePath("../GameUI")
+time_manager = NodePath("../TimeManager")
+audio_manager = NodePath("../AudioManager")
+metadata/_custom_type_script = "uid://byu58buv72ee5"
+
+[node name="GameUI" type="Node" parent="Scripts" node_paths=PackedStringArray("tap_count_label", "hold_count_label", "total_count_label", "audio_length_label", "marvelous_label", "perferct_label", "great_label", "good_label", "miss_label", "accuracy_label", "bgm_progress_bar", "score_label", "rating_label", "combo_label", "data_loader", "audio_manager", "track_manager", "score_manager", "time_manager", "game_manager", "pause_ui", "start_button", "select_button", "reset_button", "auto_play_button", "notice_window", "file_dialog", "alert_dialog")]
+process_mode = 3
+script = ExtResource("7_8n5jp")
+tap_count_label = NodePath("../../OtherUI/Debug/NotesInfo/TapCount")
+hold_count_label = NodePath("../../OtherUI/Debug/NotesInfo/HoldCount")
+total_count_label = NodePath("../../OtherUI/Debug/NotesInfo/TotalCount")
+audio_length_label = NodePath("../../OtherUI/Debug/NotesInfo/AudioLength")
+marvelous_label = NodePath("../../OtherUI/Debug/VBoxContainer/MarvelousLabel")
+perferct_label = NodePath("../../OtherUI/Debug/VBoxContainer/PerfectLabel")
+great_label = NodePath("../../OtherUI/Debug/VBoxContainer/GreatLabel")
+good_label = NodePath("../../OtherUI/Debug/VBoxContainer/GoodLabel")
+miss_label = NodePath("../../OtherUI/Debug/VBoxContainer/MissLabel")
+accuracy_label = NodePath("../../OtherUI/Debug/VBoxContainer/AccuracyLabel")
+bgm_progress_bar = NodePath("../../OtherUI/ProgressBar")
+score_label = NodePath("../../OtherUI/ScoreLabel")
+rating_label = NodePath("../../TrackUI/RatingLabel")
+combo_label = NodePath("../../TrackUI/ComboLabel")
+data_loader = NodePath("../DataLoader")
+audio_manager = NodePath("../AudioManager")
+track_manager = NodePath("../TrackManager")
+score_manager = NodePath("../ScoreManager")
+time_manager = NodePath("../TimeManager")
+game_manager = NodePath("../GameManager")
+pause_ui = NodePath("../../PauseUI")
+start_button = NodePath("../../OtherUI/Debug/DebugButton")
+select_button = NodePath("../../OtherUI/Debug/SelectFileButton")
+reset_button = NodePath("../../OtherUI/Debug/ResetButton")
+auto_play_button = NodePath("../../OtherUI/Debug/AutoPlayButton")
+notice_window = NodePath("../../Dialogs/NoticeWindow")
+file_dialog = NodePath("../../Dialogs/FileDialog")
+alert_dialog = NodePath("../../Dialogs/AcceptDialog")
+metadata/_custom_type_script = "uid://cnf1ibb7x1xdl"
+
+[node name="TrackManager" type="Node" parent="Scripts" node_paths=PackedStringArray("track_parent_node", "track1", "track2", "track3", "track4", "audio_manager", "time_manager", "game_manager", "judge_manager")]
+script = ExtResource("9_s0476")
+track_parent_node = NodePath("../../TrackUI/CenterContainer/Generator/Tracks")
+track1 = NodePath("../../TrackUI/CenterContainer/Generator/Tracks/Track1")
+track2 = NodePath("../../TrackUI/CenterContainer/Generator/Tracks/Track2")
+track3 = NodePath("../../TrackUI/CenterContainer/Generator/Tracks/Track3")
+track4 = NodePath("../../TrackUI/CenterContainer/Generator/Tracks/Track4")
+audio_manager = NodePath("../AudioManager")
+time_manager = NodePath("../TimeManager")
+game_manager = NodePath("../GameManager")
+judge_manager = NodePath("../JudgeManager")
+metadata/_custom_type_script = "uid://cfwakn61pbmer"
+
+[node name="TimeManager" type="Node" parent="Scripts" node_paths=PackedStringArray("generate_timer", "music_start_timer", "pause_wait_timer", "ui_manager", "track_manager", "game_manager", "audio_manager", "judge_manager")]
+process_mode = 3
+script = ExtResource("9_3cjv5")
+generate_timer = NodePath("../../Timers/GenerateTimer")
+music_start_timer = NodePath("../../Timers/BGMTimer")
+pause_wait_timer = NodePath("../../Timers/PauseWaitTimer")
+ui_manager = NodePath("../GameUI")
+track_manager = NodePath("../TrackManager")
+game_manager = NodePath("../GameManager")
+audio_manager = NodePath("../AudioManager")
+judge_manager = NodePath("../JudgeManager")
+metadata/_custom_type_script = "uid://crfhssbf3e2iv"
+
+[node name="JudgeManager" type="Node" parent="Scripts" node_paths=PackedStringArray("audio_manager", "score_manager")]
+script = ExtResource("8_3wskg")
+audio_manager = NodePath("../AudioManager")
+score_manager = NodePath("../ScoreManager")
+metadata/_custom_type_script = "uid://b4dm81bwe0i7y"
+
+[node name="AudioManager" type="Node" parent="Scripts" node_paths=PackedStringArray("bgm_player", "hit_sound_player")]
+script = ExtResource("11_cqpud")
+bgm_player = NodePath("../../Audio/BGM")
+hit_sound_player = NodePath("../../Audio/HitSound")
+metadata/_custom_type_script = "uid://b7rjyv1hqjif6"
+
+[node name="ScoreManager" type="Node" parent="Scripts"]
+script = ExtResource("13_10s6a")
+metadata/_custom_type_script = "uid://dvdxfvu4sj7u2"
+
+[node name="NoteObjectPool" type="Node" parent="Scripts" node_paths=PackedStringArray("game_manager")]
+script = ExtResource("14_0jq4l")
+game_manager = NodePath("../GameManager")
+metadata/_custom_type_script = "uid://4rqe620d1udo"
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="BGM" type="AudioStreamPlayer" parent="Audio"]
+bus = &"BGM"
+
+[node name="HitSound" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("21_lneu0")
+bus = &"SFX"
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="GenerateTimer" type="Timer" parent="Timers"]
+wait_time = 3.0
+one_shot = true
+
+[node name="BGMTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+one_shot = true
+
+[node name="PauseWaitTimer" type="Timer" parent="Timers"]
+process_mode = 3
+wait_time = 5.0
+one_shot = true
+
+[node name="Dialogs" type="Node" parent="."]
+
+[node name="NoticeWindow" type="Window" parent="Dialogs"]
+title = "WELCOME!"
+initial_position = 1
+size = Vector2i(400, 300)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Dialogs/NoticeWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Dialogs/NoticeWindow/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Dialogs/NoticeWindow/ScrollContainer/MarginContainer"]
+custom_minimum_size = Vector2(370, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Dialogs/NoticeWindow/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "WELCOME_TITLE_TEXT"
+label_settings = SubResource("LabelSettings_3cjv5")
+autowrap_mode = 2
+
+[node name="NoticeText1" type="RichTextLabel" parent="Dialogs/NoticeWindow/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+theme_override_font_sizes/mono_font_size = 18
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "NOTICE_TEXT_1"
+fit_content = true
+
+[node name="NoticeText2" type="RichTextLabel" parent="Dialogs/NoticeWindow/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+theme_override_font_sizes/mono_font_size = 18
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "NOTICE_TEXT_2"
+fit_content = true
+
+[node name="NoticeText3" type="RichTextLabel" parent="Dialogs/NoticeWindow/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+theme_override_font_sizes/mono_font_size = 18
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "NOTICE_TEXT_3"
+fit_content = true
+
+[node name="NoticeText4" type="RichTextLabel" parent="Dialogs/NoticeWindow/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+theme_override_font_sizes/mono_font_size = 18
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "NOTICE_TEXT_4"
+fit_content = true
+
+[node name="Label" type="Label" parent="Dialogs/NoticeWindow"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "
+"
+autowrap_mode = 1
+
+[node name="AcceptDialog" type="AcceptDialog" parent="Dialogs"]
+initial_position = 1
+unresizable = true
+force_native = true
+
+[node name="FileDialog" type="FileDialog" parent="Dialogs"]
+title = "Open a File"
+initial_position = 1
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.osu", "*.mp3", "*.ogg", "*.wav")
+use_native_dialog = true
+
+[connection signal="pressed" from="OtherUI/PauseButton" to="Scripts/GameUI" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="OtherUI/Debug/DebugButton" to="Scripts/GameUI" method="_on_debug_button_pressed"]
+[connection signal="pressed" from="OtherUI/Debug/SelectFileButton" to="Scripts/GameUI" method="_on_select_file_button_pressed"]
+[connection signal="pressed" from="OtherUI/Debug/AutoPlayButton" to="Scripts/GameUI" method="_on_auto_play_button_pressed"]
+[connection signal="pressed" from="OtherUI/Debug/ResetButton" to="Scripts/GameUI" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="PauseUI/VBoxContainer/MarginContainer/VBoxContainer/ContinueButton" to="Scripts/GameUI" method="_on_continue_button_pressed"]
+[connection signal="pressed" from="PauseUI/VBoxContainer/MarginContainer/VBoxContainer/ReloadButton" to="Scripts/GameUI" method="_on_reload_button_pressed"]
+[connection signal="loading_finished" from="Scripts/DataLoader" to="Scripts/GameUI" method="_on_data_loader_loading_finished"]
+[connection signal="loading_finished" from="Scripts/DataLoader" to="Scripts/TrackManager" method="_on_data_loader_loading_finished"]
+[connection signal="loading_finished" from="Scripts/DataLoader" to="Scripts/TimeManager" method="_on_data_loader_loading_finished"]
+[connection signal="loading_finished" from="Scripts/DataLoader" to="Scripts/ScoreManager" method="_on_data_loader_loading_finished"]
+[connection signal="reload_data" from="Scripts/DataLoader" to="Scripts/DataLoader" method="_on_reload_data"]
+[connection signal="continue_game" from="Scripts/GameManager" to="Scripts/GameUI" method="_on_game_manager_continue_game"]
+[connection signal="continue_game" from="Scripts/GameManager" to="Scripts/TimeManager" method="_on_game_continue"]
+[connection signal="end_game" from="Scripts/GameManager" to="Scripts/GameUI" method="_on_game_manager_end_game"]
+[connection signal="pause_game" from="Scripts/GameManager" to="Scripts/TimeManager" method="_on_game_pause"]
+[connection signal="reset_all" from="Scripts/GameManager" to="Scripts/DataLoader" method="_on_game_manager_reset_all"]
+[connection signal="reset_all" from="Scripts/GameManager" to="Scripts/GameUI" method="_on_game_manager_reset_all"]
+[connection signal="start_game" from="Scripts/GameManager" to="Scripts/GameUI" method="_on_game_manager_start_game"]
+[connection signal="start_game" from="Scripts/GameManager" to="Scripts/TimeManager" method="_on_game_manager_start_game"]
+[connection signal="update_judge_rating" from="Scripts/JudgeManager" to="Scripts/GameUI" method="_on_judge_manager_update_judge_rating"]
+[connection signal="update_judge_rating" from="Scripts/JudgeManager" to="Scripts/ScoreManager" method="_on_judge_manager_update_judge_rating"]
+[connection signal="update_scores" from="Scripts/ScoreManager" to="Scripts/GameUI" method="_on_score_manager_update_scores"]
+[connection signal="timeout" from="Timers/GenerateTimer" to="Scripts/TimeManager" method="_on_generate_timer_timeout"]
+[connection signal="timeout" from="Timers/BGMTimer" to="Scripts/TimeManager" method="_on_bgm_timer_timeout"]
+[connection signal="close_requested" from="Dialogs/NoticeWindow" to="Scripts/GameUI" method="_on_window_close_requested"]
+[connection signal="file_selected" from="Dialogs/FileDialog" to="Scripts/DataLoader" method="_on_file_dialog_file_selected"]

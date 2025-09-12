@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5ktdkfdal61s"]
+
+[ext_resource type="Script" uid="uid://ctso6vvmnt12d" path="res://Scripts/Note/class_hold_note.gd" id="1_2dr0x"]
+[ext_resource type="Texture2D" uid="uid://bov55h8c6nfmo" path="res://Resources/Texture2D/note_texture_1_hold.tres" id="2_a6pu3"]
+[ext_resource type="Material" uid="uid://dnh8rnllmix8w" path="res://Resources/Shader/note_shader.tres" id="2_bho0o"]
+[ext_resource type="Texture2D" uid="uid://c4qd0ajqcsfdc" path="res://Resources/Texture2D/note_texture_2_hold.tres" id="3_a6pu3"]
+
+[node name="Hold" type="Node2D" node_paths=PackedStringArray("note_texture")]
+z_index = -2
+script = ExtResource("1_2dr0x")
+note_texture = NodePath("NoteTexture")
+texture_style_1 = ExtResource("2_a6pu3")
+texture_style_2 = ExtResource("3_a6pu3")
+metadata/_custom_type_script = "uid://ctso6vvmnt12d"
+
+[node name="NoteTexture" type="TextureRect" parent="."]
+material = ExtResource("2_bho0o")
+custom_minimum_size = Vector2(80, 0)
+offset_left = 2.5
+offset_right = 82.5
+offset_bottom = 50.0
+pivot_offset = Vector2(0, 50)
+texture = ExtResource("2_a6pu3")

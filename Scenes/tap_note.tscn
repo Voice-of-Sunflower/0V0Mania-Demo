@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxumqplmbhxw8"]
+
+[ext_resource type="Script" uid="uid://bxo8xgivrpi8u" path="res://Scripts/Note/class_tap_note.gd" id="1_1wtdp"]
+[ext_resource type="Material" uid="uid://dnh8rnllmix8w" path="res://Resources/Shader/note_shader.tres" id="1_l4wvw"]
+[ext_resource type="Texture2D" uid="uid://dmkn4vta74q5n" path="res://Resources/Texture2D/note_texture_2.tres" id="3_e4afq"]
+[ext_resource type="Texture2D" uid="uid://v8avf5uhgx5d" path="res://Resources/Texture2D/note_texture_1.tres" id="3_l4wvw"]
+
+[node name="TapNote" type="Node2D" node_paths=PackedStringArray("note_texture")]
+z_index = -2
+script = ExtResource("1_1wtdp")
+note_texture = NodePath("NoteTexture")
+texture_style_1 = ExtResource("3_l4wvw")
+texture_style_2 = ExtResource("3_e4afq")
+metadata/_custom_type_script = "uid://bxo8xgivrpi8u"
+
+[node name="NoteTexture" type="TextureRect" parent="."]
+material = ExtResource("1_l4wvw")
+custom_minimum_size = Vector2(80, 35)
+offset_left = 2.5
+offset_right = 82.5
+offset_bottom = 50.0
+texture = ExtResource("3_l4wvw")

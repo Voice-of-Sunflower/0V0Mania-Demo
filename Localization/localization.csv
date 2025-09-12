@@ -1,0 +1,30 @@
+﻿id,en_US,zh_CN
+WELCOME_TITLE_TEXT,Welcome to use the 0v0Mania framework! Here are some considerations:,欢迎使用 0v0Mania 框架！以下是一些注意事项：
+NOTICE_TEXT_1,"1. The framework has no settings menu, if you want to change settings, please go to the [color=green]/Script/SimpleSetting[/color] node to make settings.",1. 框架无设置菜单，如果想修改设置请前往 [color=green]/Script/SimpleSetting[/color] 节点中进行设置
+NOTICE_TEXT_2,"2. Similarly, to modify the key settings, please go to [color=green]Project Settings/Input Map[/color] [color=red](do not modify or delete the original settings casually if you do not know how to edit the script)[/color].",2. 同样的，按键设置请前往 [color=green]项目设置/输入设置[/color] 中修改[color=red]（如果不知道如何修改脚本请不要随意修改或删除原始设置）[/color]
+NOTICE_TEXT_3,"3. For testing purposes only, some mechanisms have not implemented defensive measures. If any bugs occur, please provide feedback or make adjustments yourself.",3. 仅供测试使用，部分机制未做防御措施，如果出现BUG请反馈或自行调整
+NOTICE_TEXT_4,"4. If you need to embed this into another game, please do not forget the [color=yellow][b]M I T[/b][/color] license used in this project, for the specific requirements of the license, please look it up yourself.",4. 如果需要嵌入到另外的游戏中使用，请不要忘记项目使用的 [color=yellow][b]M I T[/b][/color] 协议，协议具体要求请自行查询
+,,
+DEBUG_B,Start Test,开始测试
+FILE_B,Select File,选择文件
+AUTO_ON,Auto Play: ON,自动游玩：开
+AUTO_OFF,Auto Play: OFF,自动游玩：关
+RESET_B,Reset All,重置全部
+,,
+PAUSE_BUTTON,|| Pause,|| 暂停
+GAME_PAUSE,Game Pause,游戏暂停
+CONTINUE_BUTTON,Continue,继续
+RELOAD_BUTTON,Reload Scene,重置场景
+,,
+NO_FILE_TEXT,No beatmap File or audio file!,没有谱面文件或者音频文件！
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
