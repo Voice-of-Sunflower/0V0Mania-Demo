@@ -139,7 +139,3 @@
 
 ### v0.1.0
 - 第一个版本，基本功能完善
-
-## 📄 许可协议
-本项目源码遵循 MIT 协议，使用插件请遵守其对应协议：
-- godot-midi-import: [MIT](https://github.com/G0retZ/godot-midi-mport?tab=MIT-1-ov-file)
