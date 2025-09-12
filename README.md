@@ -1,4 +1,6 @@
 # 0v0Mania - 类似于 osu!mania 的 4K 下落式音游Demo
+### [**Switch to English version**](./README_EN.md)
+
 <img src= https://github.com/Voice-of-Sunflower/0V0Mania-Demo/blob/0.4.0-alpha/Screenshots/0.4.0%20screenshot%201.png width="30%" /> <img src= https://github.com/Voice-of-Sunflower/0V0Mania-Demo/blob/0.4.0-alpha/Screenshots/0.4.0%20screenshot%202.png width="30%" />
 <img src= https://github.com/Voice-of-Sunflower/0V0Mania-Demo/blob/0.4.0-alpha/Screenshots/0.4.0%20screenshot%203.png width="30%" />
 
